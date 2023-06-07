@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import { useState } from "react";
 import { AuthContext } from "./AuthContext";
+import RequireAuth from "./components/RequireAuth";
 
 export default function App() {
   const [token, setToken] = useState(null);
@@ -14,7 +15,14 @@ export default function App() {
         <Routes>
           <Route element={<Home />} path="/" />
           <Route element={<Login />} path="/login" />
-          <Route element={<Dashboard />} path="/dashboard" />
+          <Route
+            element={
+              <RequireAuth>
+                <Dashboard />
+              </RequireAuth>
+            }
+            path="/dashboard"
+          />
         </Routes>
       </BrowserRouter>
     </AuthContext.Provider>

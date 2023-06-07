@@ -1,14 +1,16 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard";
-import { useState } from "react";
+import useLocalStorage from "use-local-storage";
 import { AuthContext } from "./AuthContext";
 import RequireAuth from "./components/RequireAuth";
+import Dashboard from "./pages/Dashboard";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
 
 export default function App() {
-  const [token, setToken] = useState(null);
+  // {key: value}
+  // {'token': null}
+  const [token, setToken] = useLocalStorage("token", null);
   return (
     <AuthContext.Provider value={{ token, setToken }}>
       <BrowserRouter>
